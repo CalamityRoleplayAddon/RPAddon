@@ -1,2 +1,9 @@
-# This file will automatically update with entries for new content after a build and reload.
-
+Items: {
+	EyeOfCamarune: {
+		DisplayName: Eye Of Camarune
+		Tooltip: ```
+		Increases Magic damage by 65%
+		However, you Mana is set to half its maximum, and you cannot use Mana potions
+		```
+	}
+}
