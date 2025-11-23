@@ -1,0 +1,43 @@
+using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
+using CalamityMod;
+
+namespace RoleplayAddon.Content.Projectiles
+{
+    public class ChainGodsVialFlailProjectile : ModProjectile
+    {
+        bool hasHitEnemy = false;
+
+        public override void SetStaticDefaults()
+        {
+            ProjectileID.Sets.HeldProjDoesNotUsePlayerGfxOffY[Type] = true;
+        }
+        public override void SetDefaults()
+        {
+            Projectile.netImportant = true; // This ensures that the projectile is synced when other players join the world.
+            Projectile.width = 22; 
+            Projectile.height = 22; 
+            Projectile.friendly = true; //Friendly projectiles damage enemies rather than you
+
+            Projectile.DamageType = DamageClass.Melee;
+            Projectile.scale = 0.8f;
+
+            Projectile.aiStyle = ProjAIStyleID.Flail;
+            AIType = ProjectileID.ChainKnife;
+        }
+        public override bool PreAI()
+        {
+            if(hasHitEnemy == true)
+            {
+                hasHitEnemy = false;
+                return false;
+            }
+            return true;
+        }
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            hasHitEnemy = true;
+        }
+    }
+}
